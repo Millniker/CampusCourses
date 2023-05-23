@@ -1,27 +1,34 @@
 import Profile from "./pages/Profile";
-import MainPage from "./pages/MainPage";
-import {CAMPUS_GROUP_ROUTE, LOGIN_ROUTE, MAIN_PAGE_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE} from "./utils/consts";
+import Index from "./pages";
+import {
+    CAMPUS_GROUP_ROUTE,
+    LOGIN_ROUTE,
+    MAIN_PAGE_ROUTE,
+    MY_COURSES, MY_TEACHING_COURSES,
+    PROFILE_ROUTE,
+    REGISTRATION_ROUTE
+} from "./utils/consts";
 import CampusGroup from "./pages/CampusGroup";
-import Auth from "./pages/Auth";
-import Login from "./pages/Login";
+import Registration from "./pages/registration";
+import Login from "./pages/login";
+import MyCourses from "./pages/MyCourses";
+import MyTeachingCourses from "./pages/MyTeachingCourses";
 
-export const authRoutes=[
+export const publicRoutes =[
+    {
+        path:CAMPUS_GROUP_ROUTE,
+        exact:true,
+        component:<CampusGroup/>
+    },
     {
         path:PROFILE_ROUTE,
         exact:true,
         component:<Profile/>
     },
     {
-        path:CAMPUS_GROUP_ROUTE,
-        exact:true,
-        component:<CampusGroup/>
-    }
-]
-export const publicRoutes =[
-    {
         path:MAIN_PAGE_ROUTE,
         exact:true,
-        component:<MainPage/>
+        component:<Index/>
     },
     {
         path:LOGIN_ROUTE,
@@ -30,6 +37,17 @@ export const publicRoutes =[
     {
         path:REGISTRATION_ROUTE,
         exact:true,
-        component:<Auth/>
+        component:<Registration/>
     },
+    {
+        path:MY_COURSES,
+        exact:true,
+        component:<MyCourses/>
+    },
+    {
+        path:MY_TEACHING_COURSES,
+        exact:true,
+        component:<MyTeachingCourses/>
+    },
+
 ]

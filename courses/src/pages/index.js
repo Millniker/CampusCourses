@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import NavBar from "../components/NavBar";
 import {Container} from "react-bootstrap";
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
-const MainPage = () => {
+const Index = () => {
+
     return (
         <div>
             <NavBar/>
@@ -14,4 +16,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default Index;

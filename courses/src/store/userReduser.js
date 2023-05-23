@@ -1,16 +1,16 @@
 const SET_USER ="SET_USER"
 const LOGOUT ="LOGOUT"
 const SET_ROLES ="SET_ROLES"
-const UPDATE_USER ="UPDATE_USER"
+const SET_USERS ="SET_USERS"
 const defaultState ={
     currentUser:{},
     email:'',
     isAuth:false,
-    roles:{}
-
+    roles:{},
+    users:{},
+    course:{}
 }
 export default function userReduser(state = defaultState, action){
-    console.log(action.payload)
     switch (action.type){
             case SET_USER:
             return {
@@ -31,11 +31,18 @@ export default function userReduser(state = defaultState, action){
                 ...state,
                 roles: action.payload
             }
+        case SET_USERS:
+            return {
+                ...state,
+                users:action.payload
+            }
+
         default:
             return state
     }
 }
 export const setUser = user =>({type:SET_USER, payload:user})
 export const setRoles = roles =>({type:SET_ROLES, payload:roles})
+export const setUsers = users =>({type:SET_USERS, payload:users})
+
 export const logout =()=>({type:LOGOUT})
-export const updateUser = user => ({type:UPDATE_USER})

@@ -1,7 +1,14 @@
 import React, {useEffect} from 'react';
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
-import {NavLink, useNavigate, useRoutes} from "react-router-dom";
-import {LOGIN_ROUTE, MAIN_PAGE_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
+import {Link, NavLink, useNavigate, useRoutes} from "react-router-dom";
+import {
+    CAMPUS_GROUP_ROUTE,
+    LOGIN_ROUTE,
+    MAIN_PAGE_ROUTE,
+    MY_COURSES, MY_TEACHING_COURSES,
+    PROFILE_ROUTE,
+    REGISTRATION_ROUTE
+} from "../utils/consts";
 import {useDispatch, useSelector} from "react-redux";
 import {logout, setUser} from "../store/userReduser";
 import {profile, roles} from "../api/authApi";
@@ -15,10 +22,8 @@ const NavBar = () => {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        if(localStorage.getItem(`token`)){
+        if(localStorage.getItem("token")) {
             dispatch(profile())
-            dispatch(roles())
-            console.log(isRoles);
         }
     },[])
     return (
@@ -29,15 +34,15 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        {isAuth && <Nav.Link href="#features">Группы курсов</Nav.Link>}
-                        {isRoles.isStudent && <Nav.Link href="#pricing">Мои курсы</Nav.Link>}
-                        {isRoles.isTeacher &&<Nav.Link href="#cours">Преподаваемые курсы</Nav.Link>}
+                        {isAuth && <Nav.Link onClick={() => router(CAMPUS_GROUP_ROUTE)}>Группы курсов</Nav.Link>}
+                        {isRoles.isStudent && <Nav.Link onClick={() => router(MY_COURSES)}>Мои курсы</Nav.Link>}
+                        {isRoles.isTeacher &&<Nav.Link onClick={() => router(MY_TEACHING_COURSES)}>Преподаваемые курсы</Nav.Link>}
                     </Nav>
                     <div className="pe-4">
                         <Nav>
-                            {!isAuth && <Nav.Link onClick={() => router(REGISTRATION_ROUTE)}>Регистрация</Nav.Link>}
-                            {!isAuth && <Nav.Link onClick={() => router(LOGIN_ROUTE)}>Вход</Nav.Link>}
-                            {isAuth && <Nav.Link >{user.email}</Nav.Link>}
+                            {!isAuth && <Nav.Link href="/registration">Регистрация</Nav.Link>}
+                            {!isAuth && <Nav.Link href="/login">Вход</Nav.Link>}
+                            {isAuth && <Nav.Link onClick={() => router(PROFILE_ROUTE)}>{user.email}</Nav.Link>}
                             {isAuth && <Nav.Link onClick={()=> dispatch(logout())}>Выход</Nav.Link>}
 
                         </Nav>
